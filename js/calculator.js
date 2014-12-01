@@ -16,8 +16,8 @@ var getSimplifiedTransactions = function (person) {
     }
     
   var addToUser = function (uid, amount) {
-    // var name = "";
-    var name = API.get_name(uid);
+    var name = "";
+    // var name = API.get_name(uid);
     if (!name){
       name = "(not found)";
     }
@@ -59,8 +59,7 @@ var getSimplifiedTransactions = function (person) {
 
 
 // TEST PERSON OBJECT AND CALL//
-var person1 = { 
-    uid: 12345,
+var uid1 = { 
     name: "Alice",
     transactions: [
         {type: "paid",
@@ -71,4 +70,4 @@ var person1 = {
         to: 12346}
         ]};
         
-getSimplifiedTransactions(person1)
+getSimplifiedTransactions(uid1)
