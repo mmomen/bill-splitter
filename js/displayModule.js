@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-  window.Display = (function(){
+  window.UI = (function(){
     var owedListTemplate = Handlebars.compile($('#owedTemplate').html()),
       transactionsListTemplate = Handlebars.compile($('#transactionTemplate').html()),
       newTransactonTemplate = Handlers.compile($('#newCharge').html()),
@@ -12,8 +12,8 @@ $(document).ready(function(){
       $amountInput = $('.amountInput'),
       $descriptionInput = $('.descriptionInput');
     
-    var transactionsFn = function(arr){
-      $transactionListContainer.html(transactionsListTemplate(arr));
+    var transactionsFn = function(data){
+      $transactionListContainer.html(transactionsListTemplate(data.transactions));
     };
 
     var owedFn = function(arr){
@@ -41,23 +41,6 @@ $(document).ready(function(){
         $loginStatus.text("Incorrect login. Please try again.");
     };
 
-    return {
-      transactions             : transactionsFn,
-      owed                     : owedFn,
-      newTransactionCallback   : newTransFn,
-      loginHandler             : loginFn
-    }
-  })();
-
-  window.UI = (function(){
-    var transactionListUpdateHandler = function(event,data){
-      Display.transactions(data.transactions);
-    };
-
-    var owedListUpdateHandler = function(event,data){
-      Display.owed(data);
-    };
-
     var loginButtonClickEventHandler = function(event){
       var username = $('.loginUsername').val(), password = $('.loginPassword').val();
       API.auth(username, password, Display.loginHandler);
@@ -71,14 +54,18 @@ $(document).ready(function(){
     };
 
     var initFn = function(){
-      $(document).on('updateList',transactionListUpdateHandler);
-      $(document).on('updatedOwed',owedListUpdateHandler);
+      $(document).on('updateList',Display.transactions);
+      $(document).on('updatedOwed',Display.owed);
       $(document).on('click', '.loginButton',loginButtonEventHandler);
       $(document).on('click','.submitInput',submitTransactionClickEventHandler);
     };
 
     return {
-      init : initFn
+      transactions             : transactionsFn,
+      owed                     : owedFn,
+      newTransactionCallback   : newTransFn,
+      loginHandler             : loginFn,
+      init                     : initFn
     }
   })();
 
