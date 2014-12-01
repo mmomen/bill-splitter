@@ -2,16 +2,9 @@
 window.UI = (function(){
   var owedListTemplate, transactionsListTemplate, newTransactonTemplate, $transactionListContainer, 
     $newChargeContainer, $loginContainer, $loginStatus, $amountInput, $descriptionInput;
-  
-  var transactionsFn = function(data){
-    $transactionListContainer.html(transactionsListTemplate(data.transactions));
-  };
 
-  var owedFn = function(arr){
-    $owedListContainer.html(owedListTemplate(arr));
-  }
 
-  var newTransFn = function(data){
+  var newTransactionCallback = function(data){
     if (data === true){
       $('.transactionStatus').text("Success!");
       $amountInput.val('');
@@ -21,7 +14,7 @@ window.UI = (function(){
       $('.transactionStatus').text("Failure!");
   };
 
-  var loginFn = function(data){
+  var loginCallback = function(data){
     if (data === true){
       $login_container.destroy();
       API.getConnections(function(data){
@@ -31,17 +24,25 @@ window.UI = (function(){
     else // failure
       $loginStatus.text("Incorrect login. Please try again.");
   };
-
-  var loginButtonClickEventHandler = function(event){
-    var username = $('.loginUsername').val(), password = $('.loginPassword').val();
-    API.auth(username, password, Display.loginHandler);
+  
+  var transactionsFn = function(data){
+    $transactionListContainer.html(transactionsListTemplate(data.transactions));
   };
 
-  var submitTransactionClickEventHandler = function(event){
+  var owedFn = function(arr){
+    $owedListContainer.html(owedListTemplate(arr));
+  }
+
+  var loginButtonClickEventHandlerFn = function(event){
+    var username = $('.loginUsername').val(), password = $('.loginPassword').val();
+    API.auth(username, password, loginCallback);
+  };
+
+  var submitTransactionClickEventHandlerFn = function(event){
     var amount = $('.amountInput').val(), 
       description = $('.descriptionInput').val(), 
       users = $('.selectInput option:selected').selectedOptions;
-    Calculator.createTransaction(amount, description, users, Display.newTransactionCallback);
+    Calculator.createTransaction(amount, description, users, newTransactionCallback);
   };
 
   var initFn = function(){
@@ -56,17 +57,17 @@ window.UI = (function(){
     $amountInput = $('.amountInput');
     $descriptionInput = $('.descriptionInput');
 
-    $(document).on('updateList',Display.transactions);
-    $(document).on('updatedOwed',Display.owed);
-    $(document).on('click', '.loginButton',loginButtonEventHandler);
-    $(document).on('click','.submitInput',submitTransactionClickEventHandler);
+    $(document).on('updateList',UI.transactions);
+    $(document).on('updatedOwed',UI.owed);
+    $(document).on('click', '.loginButton',UI.loginHandler);
+    $(document).on('click','.submitInput',UI.submitTransactionHandler);
   };
 
   return {
     transactions             : transactionsFn,
     owed                     : owedFn,
-    newTransactionCallback   : newTransFn,
-    loginHandler             : loginFn,
+    loginHandler             : loginButtonClickEventHandlerFn,
+    submitTransactionHandler : submitTransactionClickEventHandlerFn,
     init                     : initFn
   }
 })();
