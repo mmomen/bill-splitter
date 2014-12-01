@@ -3,6 +3,9 @@
 <head>
   <link rel="stylesheet" href="css/main.css">
   <title>Bill Splitter</title>
+  <script src="js/jquery-1.11.1.min.js"></script>
+  <script src="js/handlebars-v1.3.0.js"></script>
+  <script src="js/firebase.js"></script>
 </head>
 <body>
   <div class="main-wrapper">
@@ -13,20 +16,59 @@
     </nav> 
     
    </div> 
-  <script src="js/jquery-1.11.1.min.js"></script>
-  <script src="js/handlebars-v1.3.0.js"></script>
-  <script src="js/client/1.1.1/firebase.js"></script>
+  
+  
   <script id="entry-template" type="text/x-handlebars-template">
     <div>
       <table>
         <tr>
-          <td>Sum:</td> 
-          <td>$200</td>
+          <th>Name</th>
+          <th>Amount</th>
         </tr>
+      {{#each this}}
+        <tr>
+          <td>{{name}}</td> 
+          <td>${{amount}}</td>
+        </tr>
+       {{/each}} 
       </table>
     </div>
   </script>
   <script id="transaction-template" type="text/x-handlebars-template">
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Amount</th>
+        </tr>
+        {{#each this}}
+          <tr>
+            <td>{{name}}</td>
+            <td>{{amount}}</td>
+          </tr>
+        {{/each}}
+      </table>
   </script>
+  <script id="new-charge" type="text/x-handlebars-template">
+    <table>
+      <tr>
+        <th>New Charge</th>
+      </tr>
+      {{#each this}}
+      <tr>
+        <td>Amount</td>
+        <td>{{ amount }}</td>
+      </tr>
+      <tr>
+        <td>Description</td>
+        <td>{{ description }}</td>
+      </tr>
+      {{/each}}
+      <select>
+        {{#each this}}
+        <option value="{{uid}}">{{name}}</option>
+        {{/each}}
+      </select>
+    </table>
+  <script>
 </body>
 </html>
