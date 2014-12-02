@@ -41,8 +41,7 @@ var auth = function(uid) {
   window.API = {
     getConnections: getConnections,
     postTransaction: postTransaction,
-    getName: getName,
-    auth: auth
+    getName: getName
   };
 
   return true;
