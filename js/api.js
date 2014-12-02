@@ -32,14 +32,10 @@ var auth = function(uid) {
   };
   
   var getName = function(user, callback) {
-    
+
   };
 
   var createUser = function() {
-
-  };
-  
-  var getName = function(user, callback) {
 
   };
 
