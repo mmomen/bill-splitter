@@ -1,8 +1,7 @@
 var auth = function(uid) {
-  var firebaseSite = 'https://incandescent-heat-8083.firebaseio.com';
-  var firebaseSiteUser = firebaseSite + '/people/' + uid;
+  var firebaseSite = 'https://incandescent-heat-8083.firebaseio.com/people/';
+  var firebaseSiteUser = firebaseSite + uid;
   var userData = new Firebase(firebaseSiteUser);
-  var appData = new Firebase(firebaseSite);
 
   var dataObj = {};
 
@@ -13,15 +12,26 @@ var auth = function(uid) {
   });
 
   var getConnections = function(callback) {
-    console.log(dataObj.)
   };
   
   var postTransaction = function(obj, user, callback) {
-
+    if(arguments.length < 3){
+      var callback = user;
+      dataObj["transactions"].push(obj);
+      userData.set(dataObj);
+      return true;
+    }else{
+      obj["to"] = uid;
+      var otherUser = new Firebase(firebaseSite + user + "/transactions");
+      var pushTransaction = otherUser.push();
+      pushTransaction.set(obj);
+      return true;
+    }
+    callback();
   };
   
   var getName = function(user, callback) {
-
+    
   };
   
   var auth = function(user, callback) {
