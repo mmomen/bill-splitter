@@ -39,8 +39,10 @@ var auth = function(uid) {
     })
   };
 
-  var createUser = function() {
-
+  var createUser = function(username, password) {
+    var uid = Math.floor( (Math.random() * (99999 - 10000) + 10000) );
+    var newUserRef = new Firebase(firebaseSite+uid);
+    newUserRef.set({name: username});
   };
 
   window.API = {
@@ -52,3 +54,5 @@ var auth = function(uid) {
 
   return true;
 };
+
+
