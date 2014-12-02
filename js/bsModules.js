@@ -9,7 +9,7 @@ myDataRef.on('child_added', function(snapshot) {
 
 function displayStuff(obj) {
   for (var user in obj) {
-    console.log(user);
-    console.log(obj[user].name);
+    // console.log(user);
+    // console.log(obj[user].name);
   }
 }
