@@ -12,6 +12,7 @@ var auth = function(uid) {
   });
 
   var getConnections = function(callback) {
+    return dataObj.connections;
   };
   
   var postTransaction = function(obj, user, callback) {
@@ -32,16 +33,6 @@ var auth = function(uid) {
   
   var getName = function(user, callback) {
     
-    
-  };
-  
-  var postTransaction = function(obj, user, callback) {
-    if (arguments.length === 2) {
-      callback = user;
-    } else {
-
-    }
-    appData.set();
   };
 
   var createUser = function() {
