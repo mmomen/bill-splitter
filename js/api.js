@@ -1,4 +1,4 @@
-var auth = function(uid) {
+var auth = function(uid, callback){
   var firebaseSite = 'https://incandescent-heat-8083.firebaseio.com/people/';
   var firebaseSiteUser = firebaseSite + uid;
   var userData = new Firebase(firebaseSiteUser);
@@ -52,6 +52,7 @@ var auth = function(uid) {
     getName: getConnectionName
   };
 
+  callback();
   return true;
 };
 

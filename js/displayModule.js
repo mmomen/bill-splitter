@@ -37,17 +37,17 @@ window.UI = (function(){
     var amount = $amountInput.val(), 
       description = $descriptionInput.val(), 
       users = $('.selectInput option:selected').selectedOptions;
-    Calculator.createTransaction(amount, description, users, newTransactionCallback);
+    Calculator.postTransaction(amount, description, users, newTransactionCallback);
   };
 
   var loginButtonClickEventHandlerFn = function(event){
     var username = $loginUsername.val(), password = $loginPassword.val();
-    API.auth(username, password, loginCallback);
+    auth(username, loginCallback);
   };
 
   var createAccountHandlerFn = function(){
     var username = $loginUsername.val(), password = $loginPassword.val();
-    API.createAccount(username, password, loginCallback);
+    API.createUser(username, password, loginCallback);
   };
 
   var initFn = function(){
