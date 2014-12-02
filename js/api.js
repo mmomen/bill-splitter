@@ -32,15 +32,30 @@ var auth = function(uid) {
   
   var getName = function(user, callback) {
     
+    
   };
   
-  var auth = function(user, callback) {
+  var postTransaction = function(obj, user, callback) {
+    if (arguments.length === 2) {
+      callback = user;
+    } else {
+
+    }
+    appData.set();
+  };
+
+  var createUser = function() {
+
+  };
+  
+  var getName = function(user, callback) {
 
   };
 
   window.API = {
     getConnections: getConnections,
     postTransaction: postTransaction,
+    createUser: createUser,
     getName: getName
   };
 
