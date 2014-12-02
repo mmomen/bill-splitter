@@ -31,8 +31,12 @@ var auth = function(uid) {
     callback();
   };
   
-  var getName = function(user, callback) {
-
+  var getConnectionName = function(user, callback) {
+    var connectionNameObj = new Firebase(firebaseSite+user);
+    connectionNameObj.on('value', function(snapshot){
+      var snapshotValue = snapshot.val()
+      callback(snapshotValue.name);
+    })
   };
 
   var createUser = function() {
@@ -43,7 +47,7 @@ var auth = function(uid) {
     getConnections: getConnections,
     postTransaction: postTransaction,
     createUser: createUser,
-    getName: getName
+    getName: getConnectionName
   };
 
   return true;
