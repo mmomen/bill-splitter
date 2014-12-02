@@ -1,24 +1,75 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link href='http://fonts.googleapis.com/css?family=Droid+Sans|PT+Sans:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="css/jquery-ui.css">
   <link rel="stylesheet" href="css/main.css">
   <title>Bill Splitter</title>
   <script src="js/jquery-1.11.1.min.js"></script>
+  <script src="js/jquery-ui/jquery-ui.js"></script>
   <script src="js/handlebars-v1.3.0.js"></script>
   <script src="js/firebase.js"></script>
 </head>
 <body>
-  <div class="main-wrapper">
-    <nav class="main-nav">
-      <ul>
-        <li><h1 call="title">Bill Splitter</h1></li>
-      </ul>  
-    </nav> 
-    
-   </div> 
   
-  
-  <script id="entry-template" type="text/x-handlebars-template">
+   <nav class="mainNav">
+        <ul>
+          <li><h1 call="title">Bill Splitter</h1></li>
+        </ul>  
+  </nav>    
+    <div class="mainWrapper">
+      
+    </div> 
+  <div class="loginContainer">
+    <div class="loginStatus">
+    </div>  
+    <div class="loginInfo">
+      <div class="loginText grid-9">  
+        <p>Splitting your bill has never been so easy!</p>
+        <ul class="reasons">
+          <li>Decide how to split the bill</li>
+          <li></li>
+        </ul>  
+      </div>  
+       
+      <form class="loginForm">  
+        <input type="text" placeholder="Name" height="100" class="loginUsername"><br>
+        <input type="password" placeholder="Password" class="loginPassword"><br>
+        <button class="loginButton">Submit</button>
+        <button class="createAccount">Create Account</button>
+      </form> 
+      
+     </div>  
+  </div>
+  <div class="owedContainer">
+  </div>
+  <div class="transationContainer">
+  </div>
+  <div class="newChargeContainer">
+    <table>
+      <tr>
+        <th>New Charge</th>
+      </tr>
+      <tr>
+        <td>Amount</td>
+        <td><input type="text" value="Amount" class="amountInput"></td>
+      </tr>
+      <tr>
+        <td>Description</td>
+        <td><input type="text" value="Description" class="descriptionInput"></td>
+      </tr>
+      <tr>
+        <td><select class="selectInput">
+            </select>
+        </td>    
+      </tr>
+      <tr>   
+         <td><input type="submit" value="Submit" class="submitInput"></td>
+      </tr>   
+    </table>
+     
+  </div>  
+  <script id="owedTemplate" type="text/x-handlebars-template">
     <div>
       <table>
         <tr>
@@ -34,7 +85,7 @@
       </table>
     </div>
   </script>
-  <script id="transaction-template" type="text/x-handlebars-template">
+  <script id="transactionTemplate" type="text/x-handlebars-template">
       <table>
         <tr>
           <th>Name</th>
@@ -47,28 +98,19 @@
           </tr>
         {{/each}}
       </table>
+      <div class="transactionStatus">
+      </div>
   </script>
-  <script id="new-charge" type="text/x-handlebars-template">
-    <table>
-      <tr>
-        <th>New Charge</th>
-      </tr>
-      {{#each this}}
-      <tr>
-        <td>Amount</td>
-        <td>{{ amount }}</td>
-      </tr>
-      <tr>
-        <td>Description</td>
-        <td>{{ description }}</td>
-      </tr>
-      {{/each}}
-      <select>
+  <script id="newCharge" type="text/x-handlebars-template">
+    
+      
         {{#each this}}
         <option value="{{uid}}">{{name}}</option>
         {{/each}}
-      </select>
-    </table>
+   
+  </script>
   <script>
+
+  </script>
 </body>
 </html>
